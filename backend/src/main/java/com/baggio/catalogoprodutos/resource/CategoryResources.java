@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.baggio.catalogoprodutos.entity.Category;
+import com.baggio.catalogoprodutos.dto.CategoryDTO;
 import com.baggio.catalogoprodutos.service.CategoryService;
 
 @RestController
@@ -19,9 +19,9 @@ public class CategoryResources {
 	private CategoryService categoryService;
 	
 	@GetMapping
-	public ResponseEntity<Page<Category>> findAllCategories(Pageable pageable) {
-		Page<Category> page = categoryService.findAll(pageable);
-		return ResponseEntity.ok(page);
+	public ResponseEntity<Page<CategoryDTO>> findAllCategories(Pageable pageable) {
+		Page<CategoryDTO> pageDTO = categoryService.findAll(pageable);		
+		return ResponseEntity.ok(pageDTO);
 	}
 	
 }
