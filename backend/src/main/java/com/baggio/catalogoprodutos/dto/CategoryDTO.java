@@ -4,36 +4,21 @@ import javax.validation.constraints.NotBlank;
 
 import com.baggio.catalogoprodutos.entity.Category;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class CategoryDTO {
 
 	private Long id;
 	
 	@NotBlank
 	private String name;
-	
-	public CategoryDTO() {
-
-	}
 
 	public CategoryDTO(Category category) {
 		id = category.getId();
-		this.name = category.getName();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		name = category.getName();
 	}
 	
 }

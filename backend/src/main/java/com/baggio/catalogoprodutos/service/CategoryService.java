@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baggio.catalogoprodutos.dto.CategoryDTO;
 import com.baggio.catalogoprodutos.entity.Category;
 import com.baggio.catalogoprodutos.repository.CategoryRepository;
+import com.baggio.catalogoprodutos.service.exceptions.EntityNotFoundException;
 
 @Service
 public class CategoryService {
@@ -27,7 +28,8 @@ public class CategoryService {
 	@Transactional(readOnly = true)
 	public CategoryDTO findById(Long id) {
 		Optional<Category> categoryOptional = categoryRepository.findById(id);
-		Category category = categoryOptional.get();
+		Category category = categoryOptional.orElseThrow(
+				() -> new EntityNotFoundException("Entidade não encontrada com o id: "+ id));
 
 		return new CategoryDTO(category);
 	}
