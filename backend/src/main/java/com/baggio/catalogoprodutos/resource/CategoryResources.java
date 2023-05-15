@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,12 @@ public class CategoryResources {
 	public ResponseEntity<Page<CategoryDTO>> findAllCategories(Pageable pageable) {
 		Page<CategoryDTO> pageDTO = categoryService.findAll(pageable);		
 		return ResponseEntity.ok(pageDTO);
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+		CategoryDTO categoryDTO = categoryService.findById(id);		
+		return ResponseEntity.ok(categoryDTO);
 	}
 	
 }
