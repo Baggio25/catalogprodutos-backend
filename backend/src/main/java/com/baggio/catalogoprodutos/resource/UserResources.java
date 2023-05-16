@@ -2,6 +2,8 @@ package com.baggio.catalogoprodutos.resource;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +43,7 @@ public class UserResources {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO userInsertDTO) {
+	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO userInsertDTO) {
 		UserDTO newUserDTO = userService.insert(userInsertDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(newUserDTO.getId()).toUri();
@@ -50,7 +52,7 @@ public class UserResources {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> update(@RequestBody UserDTO userDTO,
+	public ResponseEntity<UserDTO> update(@Valid @RequestBody UserDTO userDTO,
 			@PathVariable Long id) {
 		userDTO = userService.update(userDTO, id);		
 		return ResponseEntity.ok(userDTO);

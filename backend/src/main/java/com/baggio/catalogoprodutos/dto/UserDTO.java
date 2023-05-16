@@ -3,6 +3,9 @@ package com.baggio.catalogoprodutos.dto;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import com.baggio.catalogoprodutos.entity.User;
 
 import lombok.Data;
@@ -13,8 +16,15 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
 	private Long id;
+	
+	@NotBlank
 	private String firstName;
+	
+	@NotBlank
 	private String lastName;
+	
+	@NotBlank
+	@Email
 	private String email;
 	
 	Set<RoleDTO> roles = new HashSet<RoleDTO>();

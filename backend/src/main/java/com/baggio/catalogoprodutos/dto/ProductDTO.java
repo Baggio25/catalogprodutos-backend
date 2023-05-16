@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 
 import com.baggio.catalogoprodutos.entity.Category;
 import com.baggio.catalogoprodutos.entity.Product;
@@ -20,12 +22,14 @@ public class ProductDTO {
 	private Long id;
 	
 	@NotBlank
+	@Size(min = 5, max = 100)
 	private String name;
 	
 	@NotBlank
 	private String description;
 	
 	@NotBlank
+	@Positive
 	private Double price;
 	
 	private String imgUrl;
