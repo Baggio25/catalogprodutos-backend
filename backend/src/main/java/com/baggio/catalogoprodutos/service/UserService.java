@@ -9,11 +9,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baggio.catalogoprodutos.dto.RoleDTO;
 import com.baggio.catalogoprodutos.dto.UserDTO;
+import com.baggio.catalogoprodutos.dto.UserInsertDTO;
 import com.baggio.catalogoprodutos.dto.UserListDTO;
 import com.baggio.catalogoprodutos.entity.Role;
 import com.baggio.catalogoprodutos.entity.User;
@@ -26,6 +28,9 @@ import com.baggio.catalogoprodutos.service.exceptions.ResourceNotFoundException;
 @Service
 public class UserService {
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -48,9 +53,10 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO insert(UserDTO userDTO) {
+	public UserDTO insert(UserInsertDTO userInsertDTO) {
 		User user = new User();
-		copyDtoToEntity(userDTO, user);
+		copyDtoToEntity(userInsertDTO, user);
+		user.setPassword(passwordEncoder.encode(userInsertDTO.getPassword()));
 		user = userRepository.save(user);
 		
 		return new UserDTO(user);

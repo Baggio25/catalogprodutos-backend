@@ -37,9 +37,10 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 	
+	@Column(unique = true)
 	private String email;
 	
-	private String pasword;
+	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
@@ -47,12 +48,12 @@ public class User {
 			   inverseJoinColumns = @JoinColumn(name = "role_id"))
 	Set<Role> roles = new HashSet<Role>();
 
-	public User(Long id, String firstName, String lastName, String email, String pasword) {
+	public User(Long id, String firstName, String lastName, String email, String password) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.pasword = pasword;
+		this.password = password;
 	}
 	
 
