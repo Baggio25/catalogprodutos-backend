@@ -20,14 +20,13 @@ import com.baggio.catalogoprodutos.components.JwtTokenEnhancer;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	
 	@Value("${security.oauth2.client.client-id}")
-	private String cliendId;
+	private String clientId;
 	
 	@Value("${security.oauth2.client.client-secret}")
-	private String cliendSecret;
+	private String clientSecret;
 	
 	@Value("${jwt.duration}")
 	private Integer jwtDuration;
@@ -38,12 +37,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private JwtAccessTokenConverter accessTokenConverter;
 	
-	@Autowired 
+	@Autowired
 	private JwtTokenStore tokenStore;
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
+
 	@Autowired
 	private JwtTokenEnhancer tokenEnhancer;
 	
@@ -55,22 +54,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-			.withClient(cliendId)
-			.secret(passwordEncoder.encode(cliendSecret))
-			.scopes("read", "write")
-			.authorizedGrantTypes("password")
-			.accessTokenValiditySeconds(jwtDuration);			
+		.withClient(clientId)
+		.secret(passwordEncoder.encode(clientSecret))
+		.scopes("read", "write")
+		.authorizedGrantTypes("password")
+		.accessTokenValiditySeconds(jwtDuration);
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter, tokenEnhancer));
+
+		TokenEnhancerChain chain = new TokenEnhancerChain();
+		chain.setTokenEnhancers(Arrays.asList(accessTokenConverter, tokenEnhancer));
 		
 		endpoints.authenticationManager(authenticationManager)
-			.tokenStore(tokenStore)
-			.accessTokenConverter(accessTokenConverter)
-			.tokenEnhancer(tokenEnhancerChain);
+		.tokenStore(tokenStore)
+		.accessTokenConverter(accessTokenConverter)
+		.tokenEnhancer(chain);
 	}
-	
 }
