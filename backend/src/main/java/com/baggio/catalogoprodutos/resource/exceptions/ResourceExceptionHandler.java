@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -47,16 +48,20 @@ public class ResourceExceptionHandler {
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<StandardError> validation(MethodArgumentNotValidException ex,
+	public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException ex,
 			HttpServletRequest request) {
 		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
 		
-		StandardError error = new StandardError();
+		ValidationError error = new ValidationError();
 		error.setTimestamp(Instant.now());
 		error.setStatus(status.value());
 		error.setError("Validation Exception");
-		error.setMessage(ex.getMessage());
+		error.setMessage("Verifique a validação dos campos.");
 		error.setPath(request.getRequestURI());
+		
+		for(FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
+			error.addError(fieldError.getField(), fieldError.getDefaultMessage());
+		}		
 		
 		return ResponseEntity.status(status).body(error);
 	}
