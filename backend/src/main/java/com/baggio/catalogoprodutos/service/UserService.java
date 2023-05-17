@@ -17,6 +17,7 @@ import com.baggio.catalogoprodutos.dto.RoleDTO;
 import com.baggio.catalogoprodutos.dto.UserDTO;
 import com.baggio.catalogoprodutos.dto.UserInsertDTO;
 import com.baggio.catalogoprodutos.dto.UserListDTO;
+import com.baggio.catalogoprodutos.dto.UserUpdateDTO;
 import com.baggio.catalogoprodutos.entity.Role;
 import com.baggio.catalogoprodutos.entity.User;
 import com.baggio.catalogoprodutos.repository.RoleRepository;
@@ -63,7 +64,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO update(UserDTO userDTO, Long id) {
+	public UserDTO update(UserUpdateDTO userDTO, Long id) {
 		try {
 			User user = userRepository.getReferenceById(id);
 			copyDtoToEntity(userDTO, user);	

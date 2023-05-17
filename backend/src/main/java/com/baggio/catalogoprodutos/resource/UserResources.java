@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.baggio.catalogoprodutos.dto.UserDTO;
 import com.baggio.catalogoprodutos.dto.UserInsertDTO;
 import com.baggio.catalogoprodutos.dto.UserListDTO;
+import com.baggio.catalogoprodutos.dto.UserUpdateDTO;
 import com.baggio.catalogoprodutos.service.UserService;
 
 @RestController
@@ -52,10 +53,10 @@ public class UserResources {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> update(@Valid @RequestBody UserDTO userDTO,
+	public ResponseEntity<UserDTO> update(@Valid @RequestBody UserUpdateDTO userUpdateDTO,
 			@PathVariable Long id) {
-		userDTO = userService.update(userDTO, id);		
-		return ResponseEntity.ok(userDTO);
+		UserDTO newUserDTO = userService.update(userUpdateDTO, id);		
+		return ResponseEntity.ok(newUserDTO);
 	}
 
 	@DeleteMapping(value = "/{id}")
