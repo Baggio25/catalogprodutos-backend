@@ -1,9 +1,11 @@
 import './assets/styles/custom.scss';
 import './App.css';
 
-function App() {
+import Navbar from './components/Navbar';
+
+const App = () => {
   return (
-    <h3>DSCatalog</h3>
+    <Navbar />
   );
 }
 
