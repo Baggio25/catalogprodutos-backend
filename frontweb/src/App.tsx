@@ -2,7 +2,7 @@ import './App.css';
 
 function App() {
   return (
-    <span>DSCatalog</span>
+    <h3>DSCatalog</h3>
   );
 }
 
