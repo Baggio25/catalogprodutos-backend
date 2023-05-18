@@ -31,10 +31,11 @@ public class ProductResources {
 	private ProductService productService;
 	
 	@GetMapping
-	public ResponseEntity<Page<ProductListDTO>> findAllProducts(
+	public ResponseEntity<Page<ProductListDTO>> findAllPaged(
 			@RequestParam(value = "categoryId", defaultValue = "0") Long categoryId,
+			@RequestParam(value = "name", defaultValue = "") String name,
 			Pageable pageable) {
-		Page<ProductListDTO> pageDTO = productService.findAllByProductAndCategory(categoryId, pageable);		
+		Page<ProductListDTO> pageDTO = productService.findAllPaged(categoryId, name.trim(), pageable);		
 		return ResponseEntity.ok(pageDTO);
 	}
 

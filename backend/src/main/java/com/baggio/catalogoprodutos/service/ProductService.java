@@ -1,5 +1,7 @@
 package com.baggio.catalogoprodutos.service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -33,9 +35,9 @@ public class ProductService {
 	private CategoryRepository categoryRepository;
 	
 	@Transactional(readOnly = true)
-	public Page<ProductListDTO> findAllByProductAndCategory(Long categoryId, Pageable pageable) {
-		Category category = (categoryId == 0) ? null : categoryRepository.getReferenceById(categoryId);
-		Page<Product> pageDTO = productRepository.findAllByProductAndCategory(category, pageable); 
+	public Page<ProductListDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
+		List<Category> categories = (categoryId == 0) ? null : Arrays.asList(categoryRepository.getReferenceById(categoryId));
+		Page<Product> pageDTO = productRepository.findAllPaged(categories, name,  pageable); 
 		return pageDTO.map(product -> new ProductListDTO(product));		
 	}
 	
