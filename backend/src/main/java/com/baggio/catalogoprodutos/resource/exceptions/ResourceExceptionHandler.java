@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.baggio.catalogoprodutos.service.exceptions.DatabaseException;
+import com.baggio.catalogoprodutos.service.exceptions.ForbiddenException;
 import com.baggio.catalogoprodutos.service.exceptions.ResourceNotFoundException;
+import com.baggio.catalogoprodutos.service.exceptions.UnauthorizedException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -43,6 +45,24 @@ public class ResourceExceptionHandler {
 		error.setError("Database Exception");
 		error.setMessage(ex.getMessage());
 		error.setPath(request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(error);
+	}
+	
+	@ExceptionHandler(ForbiddenException.class)
+	public ResponseEntity<OAuthCustomError> forbidden(ForbiddenException ex,
+			HttpServletRequest request) {
+		HttpStatus status = HttpStatus.FORBIDDEN;		
+		OAuthCustomError error = new OAuthCustomError("Forbidden", ex.getMessage());	
+		
+		return ResponseEntity.status(status).body(error);
+	}
+	
+	@ExceptionHandler(UnauthorizedException.class)
+	public ResponseEntity<OAuthCustomError> unauthorized(UnauthorizedException ex,
+			HttpServletRequest request) {
+		HttpStatus status = HttpStatus.UNAUTHORIZED;		
+		OAuthCustomError error = new OAuthCustomError("nauthorized", ex.getMessage());	
 		
 		return ResponseEntity.status(status).body(error);
 	}
