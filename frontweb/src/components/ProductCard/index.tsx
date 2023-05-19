@@ -1,4 +1,5 @@
 
+import ProductPrice from "../../components/ProductPrice";
 import ProductImg from "../../assets/images/product.png";
 
 import "./styles.css";
@@ -11,7 +12,7 @@ const ProductCard = () => {
             </div>
             <div className="card-bottom-container">
                 <h6>Nome do Produto</h6>
-                <p>1200.23</p>
+                <ProductPrice />
             </div>
         </div>
     )
