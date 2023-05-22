@@ -19,8 +19,8 @@ import lombok.Setter;
 @Table(name = "tb_category")
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Category {
 	
 	@Id

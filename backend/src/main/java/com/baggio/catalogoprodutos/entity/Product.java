@@ -23,8 +23,8 @@ import lombok.Setter;
 @Table(name = "tb_product")
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Product {
 	
 	@Id
