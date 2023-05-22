@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 
 import './styles.css';
 
@@ -8,9 +9,9 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md bg-primary navbar-dark main-nav">
       <div className="container-fluid">
-        <a href="link" className="nav-logo-text">
+        <Link to="/" className="nav-logo-text">
           <h4>DS Catalog</h4>
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -26,15 +27,17 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="dscatalog-navbar">
           <ul className="navbar-nav offset-md-3 main-menu">
             <li>
-              <a href="link" className="active">
+              <NavLink to="/home" className={(navData) => navData.isActive ? "active" : "" }>
                 HOME
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="link">CATÁLOGO</a>
+              <NavLink to="/products" className={(navData) => navData.isActive ? "active" : "" }>
+                CATÁLOGO
+               </NavLink>
             </li>
             <li>
-              <a href="link">ADMINISTRADOR</a>
+              <NavLink to="/admin" className={(navData) => navData.isActive ? "active" : "" }>ADMINISTRADOR</NavLink>
             </li>
           </ul>
         </div>
