@@ -44,7 +44,7 @@ public class ProductDTO {
 		name = product.getName();
 		description = product.getDescription();
 		price = product.getPrice();
-		imgUrl = product.getDescription();
+		imgUrl = product.getImgUrl();
 		date = product.getDate();
 	}
 
