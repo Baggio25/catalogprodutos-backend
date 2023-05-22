@@ -3,6 +3,7 @@ import { Navigate, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import Admin from "./pages/Admin";
+import ProductDetails from './pages/ProductDetails';
 
 const AppRoutes = () => {
   return (
@@ -11,6 +12,7 @@ const AppRoutes = () => {
       <Route path="/home" element={<Home />} />
       
       <Route path="/products" element={<Catalog />} />
+      <Route path="/products/:productId" element={<ProductDetails />} />
 
       <Route path="/admin" element={<Admin />} />
 
