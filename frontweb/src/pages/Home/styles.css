@@ -67,9 +67,10 @@
     height: 300px;
   }
 
+  /*
   .home-content-container button {
     width: 450px;
-  }
+  }*/
 }
 
 @media (min-width: 768px) {
