@@ -1,8 +1,14 @@
+import NavbarAdmin from "./NavbarAdmin";
+
+import "./styles.css";
 
 const Admin = () => {
     return(
-        <div>
-            <h1>Administrador</h1>
+        <div className="admin-container">
+            <NavbarAdmin />
+            <div className="admin-content">
+                <h1>Conteúdo</h1>
+            </div>
         </div>
     )
 }
