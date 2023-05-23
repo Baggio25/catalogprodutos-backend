@@ -1,0 +1,19 @@
+.auth-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.auth-banner-container {
+    display: none;
+}
+
+.auth-form-container {
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .auth-form-container {
+        width: 480px;
+    }
+}
