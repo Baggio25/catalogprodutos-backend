@@ -41,7 +41,7 @@
 @media (min-width: 576px) {
   .home-container {
     padding: 15px;
-    font-size: 35px;
+    font-size: 32px;
   }
 
   .home-content-container {
@@ -91,7 +91,7 @@
 @media (min-width: 992px) {
   .home-container {
     padding: 40px;
-    font-size: 50px;
+    font-size: 45px;
   }
 
   .home-content-container h1 {

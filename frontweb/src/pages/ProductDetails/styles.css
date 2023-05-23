@@ -1,6 +1,6 @@
 .product-details-container {
   padding: 10px;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .product-details-card {
@@ -72,7 +72,7 @@
 @media (min-width: 576px) {
   .product-details-container {
     padding: 20px;
-    font-size: 30px;
+    font-size: 25px;
   }
 
   .product-details-card {
@@ -83,7 +83,7 @@
 @media (min-width: 992px) {
   .product-details-container {
     padding: 30px;
-    font-size: 30px;
+    font-size: 23px;
   }
 
   .product-details-card {
