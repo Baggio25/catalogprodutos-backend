@@ -7,6 +7,7 @@ import { Product } from "../../types/Product";
 import { BASE_URL } from "util/requests";
 
 import {ReactComponent as ArrowIcon} from "../../assets/images/arrow.svg";
+import {ReactComponent as UnknownImage} from '../../assets/images/unknown-image.svg';
 
 import "./styles.css";
 
@@ -39,11 +40,8 @@ const ProductDetails = () => {
                 </Link>
                 <div className="row">
                     <div className="col-xl-6">
-                        <div className="img-container">
-                            <img 
-                                src={product?.imgUrl} 
-                                alt={product?.name} 
-                            />
+                        <div className="img-container">                            
+                            {(product?.imgUrl === "" ) ? <UnknownImage /> : <img src={product?.imgUrl} alt={product?.name} />}
                         </div>
                         <div className="name-price-container">
                             <h1>{product?.name}</h1>

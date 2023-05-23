@@ -40,6 +40,12 @@
   width: 80%;
 }
 
+.img-container svg {
+  width: 80%;
+  height: 80%;
+  color: var(--gray-100);
+}
+
 .name-price-container {
   margin-bottom: 20px;
 }
@@ -93,6 +99,11 @@
   .img-container img {
     width: 50%;
   }
+  
+  .img-container svg {
+    width: 50%;
+    height: 50%;
+  }
 
   .description-container {
     padding: 40px;
@@ -109,7 +120,7 @@
     padding: 5px;
   }
 
-  .img-container img {
+  .img-container img svg{
     width: auto;
     height: 280px;
   }
@@ -124,7 +135,7 @@
 }
 
 @media (min-width: 1400px) {
-  .img-container img {
+  .img-container img svg{
     width: auto;
     height: 460px;
   }
