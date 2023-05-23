@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import Admin from './pages/Admin';
 import ProductDetails from './pages/ProductDetails';
+import Auth from './pages/Admin/Auth';
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,11 @@ const AppRoutes = () => {
       <Route path="/products/:productId">
         <ProductDetails />
       </Route>     
+
+      <Route path="/admin/auth">
+        <Auth />
+      </Route>
+
       <Redirect from="/admin" to="/admin/dashboard" exact/>
       <Route path="/admin">
         <Admin />
