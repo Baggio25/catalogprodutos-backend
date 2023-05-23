@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 import ProductPrice from "../../components/ProductPrice";
@@ -10,16 +10,22 @@ import {ReactComponent as ArrowIcon} from "../../assets/images/arrow.svg";
 
 import "./styles.css";
 
+type UrlParams = {
+    productId: string;
+}
+
+
 const ProductDetails = () => {
 
     const [product, setProduct] = useState<Product>();
+    const { productId } = useParams<UrlParams>();
 
     useEffect(() => {
-        axios.get(BASE_URL + "/products/3")
+        axios.get(`${BASE_URL}/products/${productId}`)
             .then(response => {
                 setProduct(response.data);
             });
-    }, []);
+    }, [productId]);
 
 
     return(
