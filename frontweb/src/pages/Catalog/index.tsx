@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 import { BASE_URL } from '../../util/requests';
 import { Product } from '../../types/Product';
 import { SpringPage } from '../../types/vendor/spring';
-import { AxiosParams } from '../../types/vendor/axios';
 import ProductCard from '../../components/ProductCard';
 import Pagination from '../../components/Pagination';
 import CardLoader from './CardLoader';
@@ -17,9 +16,10 @@ const Catalog = () => {
   const [loading, isLoading] = useState(false);
 
   useEffect(() => {
-    const params: AxiosParams = {
+    const params: AxiosRequestConfig = {
       method: 'GET',
-      url: `${BASE_URL}/products`,
+      url: "/products",
+      baseURL: BASE_URL,
       params: {
         page: 0,
         size: 12,
