@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { getAuthData, requestBackendLogin, saveAuthData } from 'util/requests';
+import { requestBackendLogin, saveAuthData } from 'util/requests';
 import ButtonIcon from 'components/ButtonIcon';
 import FeedbackMessage from 'components/FeedbackMessage';
 
@@ -25,10 +25,6 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((response) => {
         saveAuthData(response.data);
-
-        const token = getAuthData().access_token;
-        console.log("Token gerado ---> ", token);
-        
         setHasError(false);
       })
       .catch((error) => {

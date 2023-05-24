@@ -1,44 +1,60 @@
-import axios from "axios";
-import qs from "qs";
+import axios, { AxiosRequestConfig } from 'axios';
+import qs from 'qs';
 
 type LoginData = {
-    username: string;
-    password: string;
-}
+  username: string;
+  password: string;
+};
 
 type LoginResponse = {
-    access_token: string;
-    token_type: string;
-    expires_in: number;
-    scope: string;
-    userFirstName: string;
-    userId: number;
-}
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+  userFirstName: string;
+  userId: number;
+};
 
-export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? "catalogo";
-const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? "catalogo123";
-const TOKEN_KEY = "authData";
+export const BASE_URL =
+  process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8080';
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? 'catalogo';
+const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? 'catalogo123';
+const TOKEN_KEY = 'authData';
 
-export const requestBackendLogin = (loginData: LoginData ) => {
-    const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: "Basic " + window.btoa(CLIENT_ID + ":" + CLIENT_SECRET)
-    };
+export const requestBackendLogin = (loginData: LoginData) => {
+  const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    Authorization: 'Basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET),
+  };
 
-    const data = qs.stringify({
-        ...loginData,
-        grant_type: "password"
-    });
+  const data = qs.stringify({
+    ...loginData,
+    grant_type: 'password',
+  });
 
-    return axios({ method: 'POST', baseURL: BASE_URL, url: "/oauth/token", data, headers });
-}
+  return axios({
+    method: 'POST',
+    baseURL: BASE_URL,
+    url: '/oauth/token',
+    data,
+    headers,
+  });
+};
+
+export const requestBackend = (config: AxiosRequestConfig) => {
+  const headers = config.withCredentials ? {
+        ...config.headers,
+        Authorization: 'Bearer ' + getAuthData().access_token,
+      } : config.headers;
+
+  return axios({ ...config, baseURL: BASE_URL, headers });
+};
 
 export const saveAuthData = (loginResponse: LoginResponse) => {
-    localStorage.setItem(TOKEN_KEY, JSON.stringify(loginResponse));
-}
+  localStorage.setItem(TOKEN_KEY, JSON.stringify(loginResponse));
+};
 
 export const getAuthData = () => {
-    const localStorageItem = localStorage.getItem(TOKEN_KEY) ?? "{}";
-    return JSON.parse(localStorageItem) as LoginResponse;
-}
+  const localStorageItem = localStorage.getItem(TOKEN_KEY) ?? '{}';
+  return JSON.parse(localStorageItem) as LoginResponse;
+};

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 
-import { BASE_URL } from '../../util/requests';
+import { requestBackend } from '../../util/requests';
 import { Product } from '../../types/Product';
 import { SpringPage } from '../../types/vendor/spring';
 import ProductCard from '../../components/ProductCard';
@@ -19,7 +19,6 @@ const Catalog = () => {
     const params: AxiosRequestConfig = {
       method: 'GET',
       url: "/products",
-      baseURL: BASE_URL,
       params: {
         page: 0,
         size: 12,
@@ -27,7 +26,7 @@ const Catalog = () => {
     };
 
     isLoading(true);
-    axios(params)
+    requestBackend(params)
       .then((response) => {
         setPage(response.data);
       })
