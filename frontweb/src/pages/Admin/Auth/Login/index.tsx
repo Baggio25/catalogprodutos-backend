@@ -50,11 +50,13 @@ const Login = () => {
               required: 'Campo obrigatório',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "E-mail inválido"
-              }
+                message: 'E-mail inválido',
+              },
             })}
             type="text"
-            className="form-control base-input"
+            className={`form-control base-input ${
+              errors.username ? 'is-invalid' : ''
+            }`}
             placeholder="Email"
             name="username"
             autoFocus
@@ -68,7 +70,9 @@ const Login = () => {
               required: 'Campo obrigatório',
             })}
             type="password"
-            className="form-control base-input "
+            className={`form-control base-input ${
+              errors.password ? 'is-invalid' : ''
+            }`}
             placeholder="Password"
             name="password"
           />
