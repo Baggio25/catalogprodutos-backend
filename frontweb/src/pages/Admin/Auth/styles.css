@@ -25,10 +25,50 @@
 }
 
 @media (min-width: 1200px) {
+    .auth-container {
+        padding: 40px;
+    }
+
     .auth-banner-container {
         display: flex;
         flex-direction: column;
+        margin-top: 20px;
+        width: 500px;
     }
-    .auth-form-container {
+
+    .auth-banner-container h1 {
+        font-size: 40px;
+        letter-spacing: -0.015em;
+        margin-bottom: 15px;
+        color: var(--gray-800);
+    }
+    
+    .auth-banner-container p {
+        font-size: 18px;
+        letter-spacing: -0.015em;
+        color: var(--gray-700);
+    }
+    
+    .auth-banner-container svg {
+        margin-top: 10px;
+        margin-left: 50px;
+        width: 55%;
+        height: auto;
+    }
+
+}
+
+@media (min-width: 1400px) {
+    .auth-banner-container {
+        width: 650px;
+    }
+
+    .auth-banner-container h1 {
+        font-size: 50px;
+        margin-bottom: 25px;
+    }
+    
+    .auth-banner-container p {
+        font-size: 28px;
     }
 }
