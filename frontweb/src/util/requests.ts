@@ -6,9 +6,19 @@ type LoginData = {
     password: string;
 }
 
+type LoginResponse = {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    scope: string;
+    userFirstName: string;
+    userId: number;
+}
+
 export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8080";
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID ?? "catalogo";
 const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET ?? "catalogo123";
+const TOKEN_KEY = "authData";
 
 export const requestBackendLogin = (loginData: LoginData ) => {
     const headers = {
@@ -22,5 +32,13 @@ export const requestBackendLogin = (loginData: LoginData ) => {
     });
 
     return axios({ method: 'POST', baseURL: BASE_URL, url: "/oauth/token", data, headers });
+}
 
+export const saveAuthData = (loginResponse: LoginResponse) => {
+    localStorage.setItem(TOKEN_KEY, JSON.stringify(loginResponse));
+}
+
+export const getAuthData = () => {
+    const localStorageItem = localStorage.getItem(TOKEN_KEY) ?? "{}";
+    return JSON.parse(localStorageItem) as LoginResponse;
 }
