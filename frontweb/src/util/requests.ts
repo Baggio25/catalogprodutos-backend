@@ -6,7 +6,7 @@ import history from './history';
 
 type Role = "ROLE_OPERATOR" | "ROLE_ADMIN";
 
-type TokenData = {
+export type TokenData = {
   exp: number;
   user_name: string;
   authorities: Role[];
@@ -69,6 +69,10 @@ export const getAuthData = () => {
   const localStorageItem = localStorage.getItem(TOKEN_KEY) ?? '{}';
   return JSON.parse(localStorageItem) as LoginResponse;
 };
+
+export const removeAuthData = () => {
+  localStorage.removeItem(TOKEN_KEY);
+}
 
 export const getTokenData = () : TokenData | undefined => {
   try{

@@ -28,9 +28,29 @@
   font-weight: 700;
 }
 
+.navbar-logout-user {
+  padding-right: 15px;
+}
+
+.navbar-logout-user span {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .main-nav {
     padding-left: 40px;
   }
+
+}
+
+@media (min-width: 1200px) {
+  .navbar-logout-user {
+    display: flex;
+  }
   
+  .navbar-logout-user span {
+    display: block;
+    margin-right: 10px;
+  }
+    
 }
