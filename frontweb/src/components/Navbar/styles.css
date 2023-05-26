@@ -28,11 +28,11 @@
   font-weight: 700;
 }
 
-.navbar-logout-user {
-  padding-right: 15px;
+.nav-user-logout {
+  display: none;
 }
 
-.navbar-logout-user span {
+.nav-username {
   display: none;
 }
 
@@ -41,16 +41,21 @@
     padding-left: 40px;
   }
 
+  .nav-user-logout {
+    display: unset;
+    color: #fff;
+    margin-right: 15px;
+  }
+
 }
 
-@media (min-width: 1200px) {
-  .navbar-logout-user {
-    display: flex;
+@media (min-width: 992px) {
+  .nav-user-logout {
+    margin-right: 40px;
   }
-  
-  .navbar-logout-user span {
-    display: block;
-    margin-right: 10px;
+
+  .nav-username {
+    display: unset;
+    margin-right: 20px;
   }
-    
 }

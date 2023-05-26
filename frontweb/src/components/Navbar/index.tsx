@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import {
-  TokenData,
   getTokenData,
   isAuthenticated,
   removeAuthData,
@@ -13,40 +12,36 @@ import './styles.css';
 
 import '@popperjs/core';
 import 'bootstrap/js/dist/collapse';
-
-type AuthData = {
-  authenticated: boolean;
-  tokenData?: TokenData;
-};
+import { AuthContext } from 'AuthContext';
 
 const Navbar = () => {
-  const [authData, setAuthData] = useState<AuthData>({ authenticated: false });
+  const {authContextData, setAuthContextData} =  useContext(AuthContext);
 
   useEffect(() => {
     if (isAuthenticated()) {
-      setAuthData({
+      setAuthContextData({
         authenticated: true,
         tokenData: getTokenData(),
       });
     } else {
-      setAuthData({
+      setAuthContextData({
         authenticated: false,
       });
     }
-  }, []);
+  }, [setAuthContextData]);
 
   const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     removeAuthData();
-    setAuthData({
+    setAuthContextData({
       authenticated: false,
     });
-    history.replace('/');
+    history.replace('/admin/auth');
   };
 
   return (
     <nav className="navbar navbar-expand-md bg-primary navbar-dark main-nav">
-      <div className="container-fluid">
+      <div className="container-fluid ">
         <Link to="/" className="nav-logo-text">
           <h4>DS Catalog</h4>
         </Link>
@@ -63,7 +58,7 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="dscatalog-navbar">
-          <ul className="navbar-nav offset-md-3 main-menu">
+          <ul className="navbar-nav offset-md-2 main-menu">
             <li>
               <NavLink to="/" exact activeClassName="active">
                 HOME
@@ -82,10 +77,10 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="navbar-logout-user">
-          {authData.authenticated && (
+        <div className="nav-user-logout">
+          {authContextData.authenticated && (
             <>
-              <span>{authData.tokenData?.user_name}</span>
+              <span className="nav-username">{authContextData.tokenData?.user_name}</span>
               <a href="#logout" onClick={handleLogoutClick}>
                 LOGOUT
               </a>
