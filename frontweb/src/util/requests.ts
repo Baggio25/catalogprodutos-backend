@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 
 import history from './history';
 
-type Role = "ROLE_OPERATOR" | "ROLE_ADMIN";
+export type Role = "ROLE_OPERATOR" | "ROLE_ADMIN";
 
 export type TokenData = {
   exp: number;
@@ -109,7 +109,7 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  if(error.response.status === 401 || error.response.status === 401) {
+  if(error.response.status === 401) {
     history.push("/admin/auth");
   }
   return Promise.reject(error);

@@ -12,7 +12,7 @@ const Admin = () => {
       <NavbarAdmin />
       <div className="admin-content">
         <Switch>
-          <PrivateRoute path="/admin/dashboard">
+          <PrivateRoute path="/admin/dashboard" >
             <h1>Dashboard</h1>
           </PrivateRoute>
           <PrivateRoute path="/admin/products">
@@ -21,7 +21,7 @@ const Admin = () => {
           <PrivateRoute path="/admin/categories">
             <h1>Category CRUD</h1>
           </PrivateRoute>
-          <PrivateRoute path="/admin/users">
+          <PrivateRoute path="/admin/users" roles={['ROLE_ADMIN']}>
             <Users />
           </PrivateRoute>
         </Switch>
