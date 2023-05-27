@@ -5,6 +5,7 @@ import { ReactComponent as Dashboard } from '../../../assets/images/dashboard.sv
 
 import './styles.css';
 import { NavLink } from 'react-router-dom';
+import { hasAnyRoles } from 'util/requests';
 
 const NavbarAdmin = () => {
   return (
@@ -28,12 +29,14 @@ const NavbarAdmin = () => {
             <p>Categorias</p>
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/admin/users" className="admin-nav-item">
-            <User />
-            <p>Usuários</p>
-          </NavLink>
-        </li>
+        { hasAnyRoles(['ROLE_ADMIN']) &&  (
+          <li>
+            <NavLink to="/admin/users" className="admin-nav-item">
+              <User />
+              <p>Usuários</p>
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );
