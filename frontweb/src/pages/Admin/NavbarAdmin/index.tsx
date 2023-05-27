@@ -1,11 +1,12 @@
+import { NavLink } from 'react-router-dom';
 import { ReactComponent as Product } from '../../../assets/images/product.svg';
 import { ReactComponent as Category } from '../../../assets/images/categories.svg';
 import { ReactComponent as User } from '../../../assets/images/user.svg';
 import { ReactComponent as Dashboard } from '../../../assets/images/dashboard.svg';
 
+import { hasAnyRoles } from 'util/auth';
+
 import './styles.css';
-import { NavLink } from 'react-router-dom';
-import { hasAnyRoles } from 'util/requests';
 
 const NavbarAdmin = () => {
   return (

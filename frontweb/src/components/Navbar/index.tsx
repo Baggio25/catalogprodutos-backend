@@ -1,18 +1,15 @@
 import { useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import {
-  getTokenData,
-  isAuthenticated,
-  removeAuthData,
-} from 'util/requests';
+import { AuthContext } from 'AuthContext';
+import { getTokenData, isAuthenticated } from 'util/auth';
+import { removeAuthData } from 'util/storage';
 import history from 'util/history';
 
 import './styles.css';
 
 import '@popperjs/core';
 import 'bootstrap/js/dist/collapse';
-import { AuthContext } from 'AuthContext';
 
 const Navbar = () => {
   const {authContextData, setAuthContextData} =  useContext(AuthContext);
