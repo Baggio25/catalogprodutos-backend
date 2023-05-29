@@ -57,7 +57,7 @@ ul {
     .admin-nav-container {
         padding: 0;
         width: 250px;
-        height: calc(100vh - 65px);
+        min-height: calc(100vh - 65px);
     }
 
     .admin-nav-item {
