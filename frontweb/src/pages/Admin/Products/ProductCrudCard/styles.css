@@ -1,5 +1,6 @@
 .product-crud-card {
   margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .product-crud-card-top-container {
@@ -30,8 +31,27 @@
 }
 
 .product-crud-categories-container {
-  padding: 0 20px;
   display: flex;
+  flex-wrap: wrap;
+  padding: 0 20px;
 
 }
 
+.product-crud-card-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.product-crud-card-button {
+  width: 200px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+  letter-spacing: -0.015em;
+}
+
+.product-crud-card-button-first {
+  margin-right: 10px;
+}
