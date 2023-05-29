@@ -55,3 +55,42 @@
 .product-crud-card-button-first {
   margin-right: 10px;
 }
+
+@media (min-width: 768px) {
+  
+  .product-crud-card {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+  }
+
+  .product-crud-card-top-container {
+    border-bottom: 0;
+    border-right: 1px solid var(--gray-300);
+  }
+
+  .product-crud-card-description {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .product-crud-card-buttons-container {
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+
+  .product-crud-card-button-first {
+    margin-right: 0;
+    margin-top: 22px;
+  }
+
+}
+
+@media (min-width: 992px) {
+  .product-crud-card-button {
+    width: 240px;
+  }
+  
+}
