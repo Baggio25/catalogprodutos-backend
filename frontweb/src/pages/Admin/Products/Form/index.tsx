@@ -10,35 +10,48 @@ const Form = () => {
           <div className="row product-crud-inputs-container">
             <div className="col-lg-6 product-crud-inputs-left-container">
               <div className="margin-bottom-30">
-                <input 
-                  type="text" 
-                  className="form-control base-input" 
-                  autoFocus/>
+                <label className="form-label">
+                  Nome
+                </label>
+                <input
+                  type="text"
+                  className="form-control base-input"
+                  autoFocus
+                />
               </div>
               <div className="margin-bottom-30">
-                <input 
-                  type="text" 
-                  className="form-control base-input" 
-                  autoFocus/>
+                <label className="form-label">
+                  Preço
+                </label>
+                <input type="text" className="form-control base-input" />
               </div>
               <div>
-                <input 
-                  type="text" 
-                  className="form-control base-input" 
-                  autoFocus/>
+                <label className="form-label">
+                  Categorias
+                </label>
+                <input type="text" className="form-control base-input" />
               </div>
             </div>
             <div className="col-lg-6">
-              <textarea
-                name=""
-                rows={10}
-                className="form-control base-input"
-              ></textarea>
+              <label className="form-label">
+                Descrição
+              </label>
+              <div>
+                <textarea
+                  name=""
+                  rows={8}
+                  className="form-control base-input h-auto"
+                />
+              </div>
             </div>
           </div>
           <div className="product-crud-buttons-container">
-            <button className="btn btn-outline-danger">CANCELAR</button>
-            <button className="btn btn-primary">SALVAR</button>
+            <button className="btn btn-outline-danger product-crud-button">
+              CANCELAR
+            </button>
+            <button className="btn btn-primary product-crud-button text-white">
+              SALVAR
+            </button>
           </div>
         </form>
       </div>
