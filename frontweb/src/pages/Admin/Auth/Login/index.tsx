@@ -11,7 +11,7 @@ import FeedbackMessage from 'components/FeedbackMessage';
 
 import './styles.css';
 
-type FormData = {
+type CredentialsDTO = {
   username: string;
   password: string;
 };
@@ -25,11 +25,11 @@ const Login = () => {
   const { from } = location.state || { from: { pathname: "/admin"}};
   const { setAuthContextData } =  useContext(AuthContext);
   const [hasError, setHasError] = useState(false);
-  const {register, handleSubmit, formState: { errors }} = useForm<FormData>();
+  const {register, handleSubmit, formState: { errors }} = useForm<CredentialsDTO>();
   const history = useHistory();
 
-  const onSubmit = (formData: FormData) => {
-    requestBackendLogin(formData)
+  const onSubmit = (credentialsDTO: CredentialsDTO) => {
+    requestBackendLogin(credentialsDTO)
       .then((response) => {
         saveAuthData(response.data);
         setHasError(false);

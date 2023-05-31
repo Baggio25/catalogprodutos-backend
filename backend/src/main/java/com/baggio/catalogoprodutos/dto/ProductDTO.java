@@ -35,7 +35,7 @@ public class ProductDTO {
 	
 	private String imgUrl;
 	
-	private Instant date;
+	private Instant date = Instant.now();
 	
 	private List<CategoryDTO> categories = new ArrayList<CategoryDTO>();
 
