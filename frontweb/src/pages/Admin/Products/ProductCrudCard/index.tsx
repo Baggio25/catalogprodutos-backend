@@ -1,17 +1,38 @@
+import { AxiosRequestConfig } from 'axios';
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as UnknownImage } from '../../../../assets/images/unknown-image.svg';
 import ProductPrice from '../../../../components/ProductPrice';
 import { Product } from '../../../../types/Product';
 import CategoryBadge from '../CategoryBadge';
+import { requestBackend } from 'util/requests';
 
 import './styles.css';
 
 type Props = {
   product: Product;
+  onDelete: Function;
 };
 
-const ProductCrudCard = ({ product }: Props) => {
+const ProductCrudCard = ({ product, onDelete }: Props) => {
+
+  const handleDelete = (productId: number) => {
+
+    if(!window.confirm("Tem certeza que deseja deletar? ")) {
+      return;
+    }
+
+    const config: AxiosRequestConfig = {
+      method: "DELETE",
+      url: `/products/${productId}`,
+      withCredentials: true
+    };
+    
+    requestBackend(config).then(() => {
+      onDelete();
+    });
+  }
+
   return (
     <div className="base-card product-crud-card">
       <div className="product-crud-card-top-container">
@@ -33,7 +54,10 @@ const ProductCrudCard = ({ product }: Props) => {
         </div>
       </div>
       <div className="product-crud-card-buttons-container">
-        <button className="btn btn-outline-danger product-crud-card-button product-crud-card-button-first">
+        <button 
+          onClick={() => handleDelete(product.id)}
+          className="btn btn-outline-danger product-crud-card-button product-crud-card-button-first"
+        >
           EXCLUIR
         </button>
         <Link to={`/admin/products/${product.id}`}>
