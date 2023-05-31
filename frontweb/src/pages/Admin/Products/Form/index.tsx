@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
+import Select from 'react-select';
 
 import { Product } from 'types/Product';
 import { requestBackend } from 'util/requests';
@@ -96,6 +97,18 @@ const Form = () => {
                   <FeedbackMessage message={errors.name?.message} />
                 </div>
               </div>
+             
+              <div className="margin-bottom-30">
+                <label className="form-label">Categorias*</label>
+                <div className="mb-4">
+                  <Select
+                    classNamePrefix="product-crud-select"
+                    isMulti
+
+                  />
+                </div>
+              </div>
+
               <div className="margin-bottom-30">
                 <label className="form-label">Preço*</label>
                 <div className="mb-4">
