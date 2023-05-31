@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import { ReactComponent as UnknownImage } from '../../../../assets/images/unknown-image.svg';
 import ProductPrice from '../../../../components/ProductPrice';
-
 import { Product } from '../../../../types/Product';
 import CategoryBadge from '../CategoryBadge';
 
@@ -14,7 +15,7 @@ const ProductCrudCard = ({ product }: Props) => {
   return (
     <div className="base-card product-crud-card">
       <div className="product-crud-card-top-container">
-        {(product.imgUrl === '') || (product.imgUrl === null) ? (
+        {product.imgUrl === '' || product.imgUrl === null ? (
           <UnknownImage />
         ) : (
           <img src={product.imgUrl} alt={product.name} />
@@ -35,9 +36,11 @@ const ProductCrudCard = ({ product }: Props) => {
         <button className="btn btn-outline-danger product-crud-card-button product-crud-card-button-first">
           EXCLUIR
         </button>
-        <button className="btn btn-outline-secondary product-crud-card-button">
-          EDITAR
-        </button>
+        <Link to={`/admin/products/${product.id}`}>
+          <button className="btn btn-outline-secondary product-crud-card-button">
+            EDITAR
+          </button>
+        </Link>
       </div>
     </div>
   );
