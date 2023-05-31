@@ -7,6 +7,16 @@
   color: var(--white);
 }
 
+.nav-logo-text {
+  display: flex;
+  align-items: flex-end;
+}
+
+.nav-logo-text span {
+  margin-left: 5px;
+  font-size: 8px;
+}
+
 .main-menu {
   width: 380px;
   display: flex;

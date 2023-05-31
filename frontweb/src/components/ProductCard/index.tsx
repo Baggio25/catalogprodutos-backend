@@ -1,4 +1,5 @@
-import {  ReactComponent as UnknownImage } from '../../assets/images/unknown-image.svg';
+import { Link } from 'react-router-dom';
+import { ReactComponent as UnknownImage } from '../../assets/images/unknown-image.svg';
 import ProductPrice from '../../components/ProductPrice';
 
 import { Product } from '../../types/Product';
@@ -24,3 +25,4 @@ const ProductCard = ({ product }: Props) => {
 };
 
 export default ProductCard;
+

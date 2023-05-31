@@ -41,6 +41,7 @@ const Navbar = () => {
       <div className="container-fluid ">
         <Link to="/" className="nav-logo-text">
           <h4>DS Catalog</h4>
+          <span>v.Beta</span>
         </Link>
         <button
           className="navbar-toggler"

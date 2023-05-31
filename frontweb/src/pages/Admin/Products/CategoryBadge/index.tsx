@@ -1,16 +1,24 @@
-
-import "./styles.css";
+import { Category } from 'types/Category';
+import './styles.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BASE_URL } from 'util/requests';
 
 type Props = {
-    name: string;
-}
+  cats: Category[];
+};
 
-const CategoryBadge = ({ name }: Props) =>{
-    return(
-        <div className="category-badge-container">
-            <h4>{name}</h4>
-        </div>
-    )
-}
+const CategoryBadge = ({ cats }: Props) => {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    let categoryId = cats.map(category => category.id);
+    axios.get(`${BASE_URL}/categories/${categoryId}`).then((response) => {
+      setCategories(response.data);
+    });
+  }, []);
+
+  return <div>{categories?.map((category) => console.log(category.name))}</div>;
+};
 
 export default CategoryBadge;
