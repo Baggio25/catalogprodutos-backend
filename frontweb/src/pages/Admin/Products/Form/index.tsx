@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
 import Select from 'react-select';
+import CurrencyInput from 'react-currency-input-field';
 
 import { Product } from 'types/Product';
 import { requestBackend } from 'util/requests';
@@ -55,11 +56,11 @@ const Form = () => {
   }, [isEditing, productId, setFocus, setValue]);
 
   const onSubmit = (product: Product) => {
-    
+    const data = {...product, price: String(product.price).replace(",", ".")}
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/products/${productId}` : '/products',
-      data: product,
+      data: data,
       withCredentials: true,
     };
 
@@ -127,15 +128,22 @@ const Form = () => {
               <div className="margin-bottom-30">
                 <label className="form-label">Preço*</label>
                 <div className="mb-4">
-                  <input
-                    {...register('price', {
-                      required: 'Campo obrigatório',
-                    })}
-                    type="text"
-                    className={`form-control base-input ${
-                      errors.price ? 'is-invalid' : ''
-                    }`}
-                    name="price"
+                  <Controller 
+                    name='price'
+                    rules={{required: "Campo obrigatório"}}
+                    control={control}
+                    render={({ field }) => (
+                      <CurrencyInput 
+                        className={`form-control base-input ${
+                          errors.price ? 'is-invalid' : ''
+                        }`}
+                        disableGroupSeparators={true}
+                        value={field.value}
+                        onValueChange={field.onChange}
+                      />
+                    )}
+
+                  
                   />
                   <FeedbackMessage message={errors.price?.message} />
                 </div>
