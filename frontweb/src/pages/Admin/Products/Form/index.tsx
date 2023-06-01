@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useHistory, useParams } from 'react-router-dom';
 import { AxiosRequestConfig } from 'axios';
 import Select from 'react-select';
 
 import { Product } from 'types/Product';
 import { requestBackend } from 'util/requests';
+import FeedbackMessage from 'components/FeedbackMessage';
 
 import { Category } from 'types/Category';
-import FeedbackMessage from 'components/FeedbackMessage';
 
 import './styles.css';
 
@@ -24,6 +24,7 @@ const Form = () => {
     formState: { errors },
     setFocus,
     setValue,
+    control
   } = useForm<Product>();
 
   const [selectCategories, setSelectCategories] = useState<Category[]>([]);
@@ -109,14 +110,26 @@ const Form = () => {
               <div className="margin-bottom-30">
                 <label className="form-label">Categorias*</label>
                 <div className="mb-4">
-                  <Select
-                    options={selectCategories}
-                    classNamePrefix="product-crud-select"
-                    getOptionLabel={
-                        (category: Category) => category.id + " - " + category.name}
-                    getOptionValue={(category: Category) => String(category.id)}
-                    isMulti
+                  <Controller 
+                    name='categories'
+                    rules={{
+                      required: true
+                    }}
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={selectCategories}
+                        classNamePrefix="product-crud-select"
+                        getOptionLabel={
+                            (category: Category) => category.id + " - " + category.name}
+                        getOptionValue={(category: Category) => String(category.id)}
+                        isMulti
+                      />
+                      
+                    )}
                   />
+                  {errors.categories && <FeedbackMessage message="Campo obrigatório" />}                  
                 </div>
               </div>
 
