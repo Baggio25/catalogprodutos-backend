@@ -50,30 +50,21 @@ const Form = () => {
         setValue('imgUrl', product.imgUrl);
       });
     } else {
-      setValue('name', '');
-      setValue('price', 0);
-      setValue('description', '');
-      setValue('categories', []);
-      setValue('imgUrl', '');
       setFocus('name');
     }
   }, [isEditing, productId, setFocus, setValue]);
 
   const onSubmit = (product: Product) => {
-    const data = {
-      ...product,
-      categories: isEditing ? product.categories : [{ id: 1, name: '' }],
-    };
-
+    
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/products/${productId}` : '/products',
-      data,
+      data: product,
       withCredentials: true,
     };
 
     requestBackend(config).then(() => {
-      history.push('/admin/products/create');
+      history.push('/admin/products');
     });
   };
 
@@ -149,7 +140,20 @@ const Form = () => {
                   <FeedbackMessage message={errors.price?.message} />
                 </div>
               </div>
+
+              <div className="margin-bottom-30">
+                <label className="form-label">Imagem</label>
+                <div className="mb-4">
+                  <input
+                    {...register('imgUrl')}
+                    type="text"
+                    className="form-control base-input"
+                    name="imgUrl"                    
+                  />
+                </div>
+              </div>
             </div>
+            
             <div className="col-lg-6">
               <label className="form-label">Descrição*</label>
               <div>
